@@ -25,6 +25,6 @@ public function up(): void
      */
     public function down(): void
     {
-        Schema::dropIfExists('kategori_pinjamen');
+        Schema::dropIfExists('kategori_pinjaman');
     }
 };

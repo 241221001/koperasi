@@ -286,10 +286,16 @@ new class extends Component {
                         <div class="w-10 h-10 bg-indigo-50 rounded-xl text-indigo-600 flex items-center justify-center font-bold text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all">📤</div>
                         <span class="text-xs font-bold text-slate-600">Tarik Saldo</span>
                     </button>
-                    <button class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-purple-500 hover:shadow-md hover:shadow-purple-500/5 transition-all duration-200 group">
-                        <div class="w-10 h-10 bg-purple-50 rounded-xl text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-all">🧾</div>
+                    <a
+                     href="{{ route('anggota.ajukan-pinjaman') }}"
+                        wire:navigate
+                        class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-purple-500 hover:shadow-md hover:shadow-purple-500/5 transition-all duration-200 group"
+                    >
+                        <div class="w-10 h-10 bg-purple-50 rounded-xl text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-all">
+                            🧾
+                        </div>
                         <span class="text-xs font-bold text-slate-600">Pinjaman Baru</span>
-                    </button>
+                    </a>
                     <button class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-slate-400 hover:shadow-md transition-all duration-200 group">
                         <div class="w-10 h-10 bg-slate-50 rounded-xl text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-700 group-hover:text-white transition-all">⚙️</div>
                         <span class="text-xs font-bold text-slate-600">Pengaturan</span>

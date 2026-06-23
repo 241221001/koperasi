@@ -14,3 +14,5 @@ Route::livewire('/admin/dashboard-admin', 'pages::admin.dashboard-admin')->name(
 
 // Dashboard khusus Anggota (Portal Client)
 Route::livewire('/anggota/dashboard', 'pages::anggota.dashboard')->name('anggota.dashboard');
+Route::livewire('/anggota/pinjaman/ajukan', 'pages::anggota.ajukan-pinjaman')
+    ->name('anggota.ajukan-pinjaman');
