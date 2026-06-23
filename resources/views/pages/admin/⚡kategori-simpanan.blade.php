@@ -53,7 +53,7 @@ new class extends Component
         $this->resetForm();
     }
 
-    // 🌟 KITA PAKAI COMPUTED PROPERTY BIAR AMAN DAN SESUAI STANDAR LIVEWIRE v4 SFC
+    
     public function getKategoriProperty()
     {
         return ModelSimpanan::latest()->get();

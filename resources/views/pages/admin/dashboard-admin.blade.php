@@ -1,6 +1,7 @@
 <?php
 use Livewire\Component;
 use App\Models\Anggota;
+use App\Models\Pinjaman; // 🌟 Tambahkan import model Pinjaman di sini
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
@@ -18,9 +19,7 @@ new class extends Component {
         $user = Auth::user();
 
         // 3. Cek Role (Sesuaikan nama kolom di database lu, misal: 'peran' atau 'role')
-        // Di sini kita cek, jika BUKAN admin DAN BUKAN petugas, langsung tendang!
         if ($user->peran !== 'admin' && $user->peran !== 'petugas') {
-            // Kita batalkan sesi dan suruh login ulang sebagai akun yang benar
             Auth::logout();
             session()->invalidate();
             session()->regenerateToken();
@@ -42,17 +41,33 @@ new class extends Component {
 
     public function totalKasMasuk()
     {
+        // Sementara 0 dulu karena modul simpanan belum dibuat penuh
         return 0; 
     }
 
     public function totalKasKeluar()
     {
-        return 0;
+        // 🌟 REVISI: Kas keluar dihitung dari total pokok pinjaman yang sudah DISETUJUI oleh admin
+        return Pinjaman::where('status', 'disetujui')->sum('jumlah_pokok');
     }
 
     public function arusKasTerbaru()
     {
-        return []; 
+        // 🌟 REVISI: Mengambil 5 data pinjaman disetujui terbaru untuk dimasukkan ke Buku Besar Dashboard
+        return Pinjaman::with('anggota')
+            ->where('status', 'disetujui')
+            ->latest('updated_at')
+            ->take(5)
+            ->get()
+            ->map(function ($pinjaman) {
+                // Kita samakan struktur object-nya dengan properti tabel di Blade biar tidak error
+                return (object) [
+                    'tanggal_transaksi' => $pinjaman->updated_at->format('d M Y'),
+                    'keterangan' => 'Pencairan Pinjaman: ' . ($pinjaman->anggota->nama ?? 'Anggota'),
+                    'jenis_kas' => 'keluar',
+                    'jumlah' => $pinjaman->jumlah_pokok
+                ];
+            });
     }
 
     public function logout()
@@ -149,7 +164,7 @@ new class extends Component {
 
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
                     <div>
-                        <p class="text-gray-400 text-xs font-bold uppercase tracking-wider">Total Kas Keluar</p>
+                        <p class="text-gray-400 text-xs font-bold uppercase tracking-wider">Total Kas Keluar (Pinjaman)</p>
                         <p class="text-2xl font-black text-red-600 mt-2">Rp {{ number_format($this->totalKasKeluar(), 0, ',', '.') }}</p>
                     </div>
                     <div class="p-4 bg-red-50 text-red-600 rounded-xl text-2xl">📉</div>
@@ -205,18 +220,19 @@ new class extends Component {
             </div>
 
             @if($halamanAktif === 'kategoris')
-                <livewire:pages::admin.kategori-simpanan :wire:key="'simpanan-pages-key'" />
+                <livewire:pages::admin.kategori-simpanan />
                 
             @elseif($halamanAktif === 'kategorip')
-                <livewire:pages::admin.kategori-pinjaman :wire:key="'pinjaman-pages-key'" />
+                <livewire:pages::admin.kategori-pinjaman  />
                 
             @elseif($halamanAktif === 'anggota')
-                <livewire:pages::admin.anggota :wire:key="'anggota-pages-key'" />
+                <livewire:pages::admin.anggota/>
                 
             @elseif($halamanAktif === 'simpanan')
                 <div class="p-8 text-center text-gray-400 bg-white rounded-xl border">Halaman Transaksi Simpanan Belum Dibuat.</div>
             @elseif($halamanAktif === 'pinjaman')
-                <div class="p-8 text-center text-gray-400 bg-white rounded-xl border">Halaman Transaksi Pinjaman Belum Dibuat.</div>
+                <livewire:pages.admin.manage-pinjaman />
+                
             @endif
         @endif
 
