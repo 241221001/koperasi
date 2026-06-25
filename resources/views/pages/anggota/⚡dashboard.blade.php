@@ -275,7 +275,7 @@ new class extends Component {
                 </div>
             </div>
 
-            <div class="space-y-3">
+            <!-- <div class="space-y-3">
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider">Aksi Cepat</h3>
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     <button class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-blue-500 hover:shadow-md hover:shadow-blue-500/5 transition-all duration-200 group">
@@ -285,9 +285,9 @@ new class extends Component {
                     <button class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-indigo-500 hover:shadow-md hover:shadow-indigo-500/5 transition-all duration-200 group">
                         <div class="w-10 h-10 bg-indigo-50 rounded-xl text-indigo-600 flex items-center justify-center font-bold text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all">📤</div>
                         <span class="text-xs font-bold text-slate-600">Tarik Saldo</span>
-                    </button>
+                    </button> -->
                     <!-- Setor Tunai -->
-                    <a href="{{ route('anggota.ajukan-pinjaman') }}"
+                    <!-- <a href="{{ route('anggota.ajukan-pinjaman') }}"
                         wire:navigate
                         class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-purple-500 hover:shadow-md hover:shadow-purple-500/5 transition-all duration-200 group"
                     >
@@ -301,7 +301,37 @@ new class extends Component {
                         <span class="text-xs font-bold text-slate-600">Pengaturan</span>
                     </button>
                 </div>
-            </div>
+            </div> -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <!-- Setor Tunai -->
+    <a href="{{ route('setor-tunai') }}"
+       wire:navigate
+       class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-blue-500 hover:shadow-md hover:shadow-blue-500/5 transition-all duration-200 group">
+        <div class="w-10 h-10 bg-blue-50 rounded-xl text-blue-600 flex items-center justify-center font-bold text-lg group-hover:bg-blue-600 group-hover:text-white transition-all">📥</div>
+        <span class="text-xs font-bold text-slate-600">Setor Tunai</span>
+    </a>
+    
+    <!-- Tarik Tunai -->
+    <a href="{{ route('tarik-tunai') }}"
+       wire:navigate
+       class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-indigo-500 hover:shadow-md hover:shadow-indigo-500/5 transition-all duration-200 group">
+        <div class="w-10 h-10 bg-indigo-50 rounded-xl text-indigo-600 flex items-center justify-center font-bold text-lg group-hover:bg-indigo-600 group-hover:text-white transition-all">📤</div>
+        <span class="text-xs font-bold text-slate-600">Tarik Saldo</span>
+    </a>
+    
+    <!-- Tombol lainnya -->
+    <a href="{{ route('anggota.ajukan-pinjaman') }}"
+       wire:navigate
+       class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-purple-500 hover:shadow-md hover:shadow-purple-500/5 transition-all duration-200 group">
+        <div class="w-10 h-10 bg-purple-50 rounded-xl text-purple-600 flex items-center justify-center font-bold text-lg group-hover:bg-purple-600 group-hover:text-white transition-all">🧾</div>
+        <span class="text-xs font-bold text-slate-600">Pinjaman Baru</span>
+    </a>
+    
+    <button class="bg-white p-4 rounded-2xl border border-slate-200/60 shadow-sm flex flex-col items-center justify-center text-center space-y-2 hover:border-slate-400 hover:shadow-md transition-all duration-200 group">
+        <div class="w-10 h-10 bg-slate-50 rounded-xl text-slate-600 flex items-center justify-center font-bold text-lg group-hover:bg-slate-700 group-hover:text-white transition-all">⚙️</div>
+        <span class="text-xs font-bold text-slate-600">Pengaturan</span>
+    </button>
+</div>
 
             <div class="bg-white rounded-3xl border border-slate-200/60 p-6 shadow-sm space-y-4">
                 <div class="flex justify-between items-center border-b border-slate-100 pb-3">
