@@ -123,6 +123,9 @@ new class extends Component {
                 <button wire:click="gantiHalaman('pinjaman')" 
                     class="w-full flex items-center space-x-3 p-2.5 rounded-lg text-left transition font-semibold {{ $halamanAktif === 'pinjaman' ? 'bg-indigo-700 text-white' : 'text-indigo-200 hover:bg-indigo-800 hover:text-white' }}">
                     <span>💳 Pinjaman</span>
+                                    <button wire:click="gantiHalaman('arus-kas')" 
+                    class="w-full flex items-center space-x-3 p-2.5 rounded-lg text-left transition font-semibold {{ $halamanAktif === 'pinjaman' ? 'bg-indigo-700 text-white' : 'text-indigo-200 hover:bg-indigo-800 hover:text-white' }}">
+                    <span>💳 Arus-kas</span>
                 </button>
             </nav>
         </div>
@@ -231,7 +234,9 @@ new class extends Component {
             @elseif($halamanAktif === 'simpanan')
                 <div class="p-8 text-center text-gray-400 bg-white rounded-xl border">Halaman Transaksi Simpanan Belum Dibuat.</div>
             @elseif($halamanAktif === 'pinjaman')
-                <livewire:pages.admin.manage-pinjaman />
+                <livewire:pages::admin.manage-pinjaman />
+            @elseif($halamanAktif === 'arus-kas')
+                <livewire:pages::admin.arus-kas />
                 
             @endif
         @endif
